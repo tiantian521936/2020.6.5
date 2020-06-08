@@ -1,3 +1,13 @@
 module.exports ={
-    lintOnSave:false
+    lintOnSave:false,
+    devServer:{
+        proxy:{
+            '/api':{
+                //
+                target:"http://182.92.128.115",
+                //是否允许跨域
+                changeOrigin:true,
+            }
+        }
+}
    }
