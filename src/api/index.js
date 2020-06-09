@@ -1,4 +1,5 @@
 import instance from './ajax'
+
 //请求登录接口
 export function reqlogin (mobile,password){
     return instance({
@@ -10,12 +11,12 @@ export function reqlogin (mobile,password){
         }
     })
 }
+
 //获取三级分类的接口
 export function reqCategorys(){
-    instance({
+    return instance({
         url : '/product/getBaseCategoryList',
-        method : 'POST',
-        
-        
+        method : 'GET',    
     })
 }
+

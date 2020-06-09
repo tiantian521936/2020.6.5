@@ -14,25 +14,25 @@
                 </nav>
                 <div class="sort">
                     <div class="all-sort-list2">
-                        <div class="item bo">
+                        <div class="item" v-for="(c1,index) in categorylist" :key="c1.categoryId">
                             <h3>
-                                <a href="">图书、音像、数字商品</a>
+                                <a href="javascript:">{{c1.categoryName}}</a>
                             </h3>
                             <div class="item-list clearfix">
                                 <div class="subitem">
-                                    <dl class="fore">
+                                    <dl class="fore" v-for="(c2, index) in c1.categoryChild" :key="c2.categoryId">
                                         <dt>
-                                            <a href="">电子书</a>
+                                            <a href="javascript:;">{{c2.categoryName}}</a>
                                         </dt>
                                         <dd>
-                                            <em>
-                                                <a href="">婚恋/两性</a>
+                                            <em v-for="(c3, index) in c2.categoryChild" :key="c3.categoryId">
+                                                <a href="javascript:;">{{c3.categoryName}}</a>
                                             </em>
                                             <em>
                                                 <a href="">文学</a>
                                             </em>
                                             <em>
-                                                <a href="">经管</a>
+                                                <a href="">经管</a>s
                                             </em>
                                             <em>
                                                 <a href="">畅读VIP</a>
@@ -1695,7 +1695,24 @@
 
 <script type="text/ecmascript-6">
     export default {
-        
+        mounted() {
+           
+            this.$store.dispatch('getcategoryList')
+        },
+
+        computed: {   
+            categorylist(){
+             
+                return this.$store.state.Home.categoryList
+            },
+        },
+
+    data() {
+        return {
+            currentIndex:-1,
+        }
+    },
+
     }
 </script>
 
@@ -1812,6 +1829,7 @@
                         }
 
                         &:hover {
+                            background:#ccc;
                             .item-list {
                                 display: block;
                             }

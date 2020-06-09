@@ -17,12 +17,19 @@
 <script type="text/ecmascript-6">
 import Header from './compontents/Header'
 import Footer from './compontents/Footer'
+import {reqCategorys} from './api'
 
 
 
 
     export default {
         name: 'App',
+
+    async mounted() {
+        await reqCategorys()
+    },
+
+
         components:{
             Header,
             Footer
