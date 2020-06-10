@@ -4,29 +4,7 @@
                 <div class="center">
                     <!--banner轮播-->
                     <!-- <div class="swiper-container" id="mySwiper"> -->
-                    <div class="swiper-container" ref="swiper">
-
-                        <div class="swiper-wrapper">
-                            <div  class="swiper-slide" v-for="banner in banners" :key="banner.id">
-                                <img :src="banner.imgUrl" />
-                            </div>
-                            <!-- <div class="swiper-slide">
-                                <img src="./images/banner2.jpg" />
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="./images/banner3.jpg" />
-                            </div>
-                            <div class="swiper-slide">
-                                <img src="./images/banner4.jpg" />
-                            </div> -->
-                        </div>
-                        <!-- 如果需要分页器 -->
-                        <div class="swiper-pagination"></div>
-
-                        <!-- 如果需要导航按钮 -->
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-button-next"></div>
-                    </div>
+                   <Carousel :carouselList="banners" autoplay/>
                 </div>
                 <div class="right">
                     <div class="news">
@@ -114,31 +92,20 @@
 
 
 <script type="text/ecmascript-6">
-    import Swiper from 'swiper'
+  
     import 'swiper/css/swiper.min.css'
     import {mapState} from 'vuex'
     export default {
+
         computed: {
             ...mapState({
                 banners : state =>state.Home.banners
             })
         },
-        mounted() {
-            new Swiper (this.$refs.swiper,{
-                loop: true, 
-                autoplay : true,
+    
+        
+    }   
 
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            })   
-    	},
-    }
 </script>
 
 

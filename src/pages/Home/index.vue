@@ -6,8 +6,8 @@
     <Tody></Tody>
     <Rank></Rank>
     <Like></Like>
-    <Floor></Floor>
-    <Floor></Floor>
+    <Floor v-for="floor in floors" :key="floor.id" :floor="floor"></Floor>
+    
     <Brand></Brand>
   </div>
 </template>

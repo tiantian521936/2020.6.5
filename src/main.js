@@ -4,6 +4,9 @@ import router from './router'
 import Typenav from './compontents/Typenav/typenav.vue'
 import store from './store'
 import '@/mock/mockServer'
+import Carousel from './compontents/Carousel'
+
+Vue.component('Carousel',Carousel)//全局组件
 
 Vue.component('Typenav',Typenav)//全局组件
 new Vue({

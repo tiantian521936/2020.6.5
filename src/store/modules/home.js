@@ -35,9 +35,7 @@ export default {
 
 
         async getFloors({commit}){
-            const result = await reqFloors()
-            
-            
+            const result = await reqFloors()   
             if(result.code === 200){
                 const floors = result.data
                 commit('receive_floors',floors)
@@ -57,8 +55,6 @@ export default {
             
             if(result.code === 200){
                 const categoryList = result.data.filter((item,index )=>index<15)
-                console.log(categoryList);
-                
                 commit('receive_category_list',categoryList)
             }
         }

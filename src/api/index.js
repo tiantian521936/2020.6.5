@@ -4,7 +4,8 @@ import mockAjax from './mockAjax'
 
 export const reqBanners = () => mockAjax('/banners')
 export const reqFloors = () => mockAjax('/floors')
-
+export const reqProductList = (options) => ajax.post('/list',options)
+ 
 
         //请求登录接口
 export function reqlogin (mobile,password){
@@ -28,3 +29,13 @@ export function reqCategorys(){
 
 // export const reqBanners = () => mockAjax('/banners')
 // export const reqFloors = () => mockAjax('/floors')
+
+
+//search列表数据接口
+export function reqProductList(options){
+    return ajax({
+        url:'/list',
+        method:'POST',
+        data:options
+    })
+}
