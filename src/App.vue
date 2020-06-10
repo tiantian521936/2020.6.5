@@ -10,23 +10,17 @@
     </div>
 </template>
 
-
-
-
-
 <script type="text/ecmascript-6">
 import Header from './compontents/Header'
 import Footer from './compontents/Footer'
-import {reqCategorys} from './api'
-
-
-
+// import {reqCategorys} from './api'
 
     export default {
         name: 'App',
 
     async mounted() {
-        await reqCategorys()
+        // await reqCategorys()
+        this.$store.dispatch('getcategoryList')
     },
 
 

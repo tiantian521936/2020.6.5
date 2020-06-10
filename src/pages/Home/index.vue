@@ -21,9 +21,18 @@ import Like from "./Like/like";
 import List from "./List/list";
 import Rank from "./Rank/rank";
 import Tody from "./Tody/tody";
-
+import {mapState} from 'vuex'
 export default {
   name: "Home",
+  computed: {
+    ...mapState({
+      floors : state =>state.Home.floors
+    })
+  },
+  mounted() {
+    this.$store.dispatch('getFloors')
+    this.$store.dispatch('getBanners')
+  },
   components: {
     Brand,
     Floor,

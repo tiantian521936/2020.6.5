@@ -3,10 +3,12 @@
             <div class="sortList clearfix">
                 <div class="center">
                     <!--banner轮播-->
-                    <div class="swiper-container" id="mySwiper">
+                    <!-- <div class="swiper-container" id="mySwiper"> -->
+                    <div class="swiper-container" ref="swiper">
+
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="./images/banner1.jpg" />
+                            <div  class="swiper-slide" v-for="banner in banners" :key="banner.id">
+                                <img :src="banner.imgUrl" />
                             </div>
                             <!-- <div class="swiper-slide">
                                 <img src="./images/banner2.jpg" />
@@ -112,8 +114,30 @@
 
 
 <script type="text/ecmascript-6">
+    import Swiper from 'swiper'
+    import 'swiper/css/swiper.min.css'
+    import {mapState} from 'vuex'
     export default {
-        
+        computed: {
+            ...mapState({
+                banners : state =>state.Home.banners
+            })
+        },
+        mounted() {
+            new Swiper (this.$refs.swiper,{
+                loop: true, 
+                autoplay : true,
+
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            })   
+    	},
     }
 </script>
 

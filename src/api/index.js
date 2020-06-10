@@ -1,6 +1,12 @@
 import instance from './ajax'
+import mockAjax from './mockAjax'
 
-//请求登录接口
+
+export const reqBanners = () => mockAjax('/banners')
+export const reqFloors = () => mockAjax('/floors')
+
+
+        //请求登录接口
 export function reqlogin (mobile,password){
     return instance({
         url : '/user/passport/login',
@@ -20,3 +26,5 @@ export function reqCategorys(){
     })
 }
 
+// export const reqBanners = () => mockAjax('/banners')
+// export const reqFloors = () => mockAjax('/floors')
