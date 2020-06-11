@@ -1,9 +1,10 @@
-import {reqCategorys,reqBanners,reqFloors} from '../../api'
+import {reqCategorys,reqBanners,reqFloors,reqRecommend} from '../../api'
 export default {
     state : {
         categoryList:[],
         banners:[],
-        floors:[]
+        floors:[],
+        recommend:[]
     },
 
     mutations :{
@@ -19,6 +20,10 @@ export default {
 
         receive_category_list(state,categoryList){          
             state.categoryList = categoryList
+        },
+
+        receive_recommend_list(state,recommend){
+            state.recommend = recommend
         }
     },
 
@@ -57,8 +62,22 @@ export default {
                 const categoryList = result.data.filter((item,index )=>index<15)
                 commit('receive_category_list',categoryList)
             }
+        },
+
+
+        async getRecommend({commit}){
+            const result = await reqRecommend()
+            if(result.code === 200){
+                const recommend = result.data
+                commit('receive_recommend_list',recommend)
+            }
         }
     },
+
+
+
+
+    
 
     getters:{
 

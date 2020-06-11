@@ -14,23 +14,23 @@
                          >
                             <h3>
                                 <!-- <router-link :to = "'/search?categoryName">{{c1.categoryName}}</router-link> -->
-                                <!-- <a href="javascript:" @click="toSearch({categoryName:c1.categoryName,categoryId:c1.categoryId})">{{c1.categoryName}}</a> -->
+                                <a href="javascript:" @click="toSearch({categoryName:c1.categoryName,categoryId:c1.categoryId})">{{c1.categoryName}}</a>
                                 
-                                <a href="javascript:" data-categoryName="c1.categoryName" :data-category1Id="c1.categoryId" >{{c1.categoryName}}</a>
+                                <!-- <a href="javascript:" data-categoryName="c1.categoryName" :data-category1Id="c1.categoryId" >{{c1.categoryName}}</a> -->
                             </h3>
                             <div class="item-list clearfix">
                                 <div class="subitem">
                                     <dl class="fore" v-for="(c2, index) in c1.categoryChild" :key="c2.categoryId">
                                         <dt>
-                                            <!-- <a href="javascript:;" @click="toSearch({categoryName:c2.categoryName,categoryId:c2.categoryId})">{{c2.categoryName}}</a> -->
+                                            <a href="javascript:;" @click="toSearch({categoryName:c2.categoryName,categoryId:c2.categoryId})">{{c2.categoryName}}</a>
                                             
-                                            <a href="javascript:;" data-categoryName="c2.categoryName" :data-category2Id="c2.categoryId">{{c2.categoryName}}</a>
+                                            <!-- <a href="javascript:;" data-categoryName="c2.categoryName" :data-category2Id="c2.categoryId">{{c2.categoryName}}</a> -->
                                         </dt>
                                         <dd>
                                             <em v-for="(c3, index) in c2.categoryChild" :key="c3.categoryId">
-                                                <!-- <a href="javascript:;" @click="toSearch({categoryName:c3.categoryName,categoryId:c3.categoryId})">{{c3.categoryName}}</a> -->
+                                                <a href="javascript:;" @click="toSearch({categoryName:c3.categoryName,categoryId:c3.categoryId})">{{c3.categoryName}}</a>
                                                 
-                                                <a href="javascript:;" data-categoryName="c3.categoryName" :data-category2Id="c3.categoryId">{{c3.categoryName}}</a>
+                                                <!-- <a href="javascript:;" data-categoryName="c3.categoryName" :data-category2Id="c3.categoryId">{{c3.categoryName}}</a> -->
                                             </em>
                                             <em>
                                                 <a href="">文学</a> 

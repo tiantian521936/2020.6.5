@@ -4,7 +4,7 @@ import mockAjax from './mockAjax'
 
 export const reqBanners = () => mockAjax('/banners')
 export const reqFloors = () => mockAjax('/floors')
-export const reqProductList = (options) => ajax.post('/list',options)
+// export const reqProductList = (options) => ajax.post('/list',options)
  
 
         //请求登录接口
@@ -33,9 +33,11 @@ export function reqCategorys(){
 
 //search列表数据接口
 export function reqProductList(options){
-    return ajax({
+    return instance({
         url:'/list',
         method:'POST',
         data:options
     })
 }
+
+export const reqRecommend = () => mockAjax('/recommend')
