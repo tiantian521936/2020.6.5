@@ -11,7 +11,7 @@ export default[
         component:Home 
     },
     {
-        path:'/search:a?',
+        path:'/search/:keyword?',
         component:Search,
         name:'search'
         

@@ -12,9 +12,13 @@ Vue.component('Pagination',Pagination)
 Vue.component('Carousel',Carousel)//全局组件
 
 Vue.component('Typenav',Typenav)//全局组件
+
 new Vue({
   render: h => h(App),
   router,
   store,
+  beforeCreate(){
+    Vue.prototype.$bus = this
+  }
 
 }).$mount('#app')

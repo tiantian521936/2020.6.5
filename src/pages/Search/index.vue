@@ -87,27 +87,37 @@
             </li>
           </ul>
           <ul class="fl sui-tag">
-            <li class="with-x"  v-if  ="options.categoryName " >
-               {{options.categoryName.categoryName}} 
-               <i @click="removeCategory">*</i> 
+            <li class="with-x" v-if="options.categoryName ">
+              {{options.categoryName.categoryName}}
+              <i @click="removeCategory">*</i>
             </li>
-            <li class="with-x"  v-if  ="options.keyword " >
-                {{options.keyword}}
-                <i @click="removeKeyword">*</i> 
+            <li class="with-x" v-if="options.keyword">
+              {{options.keyword}}
+              <i @click="removeKeyword">*</i>
             </li>
-             
+            <li class="with-x" v-if="options.trademark">
+              {{options.trademark}}
+              <i @click="removeTrademark">*</i>
+            </li>
+            <li class="with-x" v-for="prop in options.props" :key="prop">
+              {{prop}}
+              <i @click="removeProp">*</i>
+            </li>
           </ul>
         </div>
-        <!--selector-->  
-        <SearchSelector />  
+        <!--selector-->
+        <SearchSelector :setTrademark="setTrademark" @addProp="addProp" />
 
         <!--details-->
         <div class="details clearfix">
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
-                  <a href="#">综合</a>
+                <li :class="{active : isActive('1')}">
+                  <a href="javascript:;" @click="setOrder('1')">
+                    综合
+                    <i class="iconfont" v-if="isActive('1')" :class="iconClass"></i>
+                  </a>
                 </li>
                 <li>
                   <a href="#">销量</a>
@@ -118,11 +128,11 @@
                 <li>
                   <a href="#">评价</a>
                 </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
+                <li :class="{active : isActive('2')}">
+                  <a href="javascript:;" @click="setOrder('2')">
+                    价格
+                    <i class="iconfont" v-if="isActive('2')" :class="iconClass"></i>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -288,47 +298,77 @@ export default {
 
   created() {
     this.getProductList();
-    
   },
 
   computed: {
     ...mapState({
       productList: state => state.search.productList
-    })
+    }),
+
+    iconClass() {
+      return this.options.order.split(":")[1] === "asc"
+        ? "icon-jiantou-copy-copy"
+        : "icon-jiantou";
+    }
   },
 
   methods: {
-    removeCategory (){
-        this.options.category1Id="", 
-        this.options.category2Id="", 
-        this.options.category3Id="", 
-        this.options.categoryName= ""
-        this.getProductList()
 
+    setOrder(flag){
+      let [orderFlag,orderType] = this.options.order.split(':')
+      if(orderFlag === flag){
+        orderType = orderType === 'asc' ? 'desc' : 'asc'
+      }else{
+        orderFlag = flag
+        orderType = 'desc'
+      }
+      this.options.order = orderFlag + ':' + orderType
+      this.getProductList()
+    }
     },
 
-    removeKeyword (){
-        this.options.keyword="", 
-
-        this.getProductList()
-
+    isActive(num) {
+      return this.options.order.indexOf(num) === 0;
     },
 
+    removeCategory() {
+      (this.options.category1Id = ""),
+        (this.options.category2Id = ""),
+        (this.options.category3Id = ""),
+        (this.options.categoryName = "");
+      this.$router.replace({ name: "search", params: this.$router.params });
+    },
+    addProp(prop) {
+      if (this.options.props.indexOf(prop) >= 0) return;
+      this.options.props.push(prop);
+      this.getProductList();
+    },
+    removeProp(index) {
+      this.options.props.splice(index, 1);
+      this.getProductList();
+    },
+    removeKeyword() {
+      this.options.keyword = "";
+      this.$router.replace({ name: "search", params: this.$router.query });
+      this.$bus.$emit("removeKeyword");
+    },
 
-
-    
     getProductList(pageNo = 1) {
-        this.options.pageNo = pageNo
+      this.options.pageNo = pageNo;
       this.$store.dispatch("getProductList", this.options);
     },
 
-  },
+    setTrademark(trademark) {
+      if (this.options.trademark === trademark) return;
+      this.options.trademark = trademark;
+      this.getProductList();
+    },
 
-  mounted() {
-    this.getProductList();
-  },
-
-  beforeMount() {
+    removeTrademark() {
+      this.options.trademark = "";
+      this.getProductList();
+    },
+ beforeMount() {
     const {
       categoryName,
       category1Id,
@@ -344,20 +384,21 @@ export default {
       category3Id,
       keyword
     };
-    // console.log(this.$route.query);
-    console.log(this.options);
-    
   },
 
+  }
+
+ 
+
   watch: {
-    $route() {
+    $route () {
       const {
         category1Id = "",
         category2Id = "",
         category3Id = "",
         categoryName = ""
       } = this.$route.query;
-      const keyword = this.$route.params.value;
+      const keyword = this.$route.params.keyword;
       this.options = {
         ...this.options,
         category1Id,
@@ -365,15 +406,16 @@ export default {
         category3Id,
         categoryName,
         keyword
-      };
+      },
+
       this.getProductList();
     }
-  },
+  }
 
   components: {
     SearchSelector
   }
-};
+
 </script>
 
 
