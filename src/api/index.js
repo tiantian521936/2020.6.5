@@ -41,3 +41,18 @@ export function reqProductList(options){
 }
 
 export const reqRecommend = () => mockAjax('/recommend')
+
+export const reqDetail = (skuId) => instance(`/item/${skuId}`)
+
+export function reqCart(skuId,skuNum){
+    return instance({
+        url:'/cart/addToCart/'+skuId+'/'+skuNum,
+        method:'POST'
+    })
+}
+
+export const reqShopCart = () => instance.get('/cart/cartList')
+
+export const reqCheckCartItem = (skuId, isChecked) => instance.get(`/cart/checkCart/${skuId}/${isChecked}`)
+
+export const reqDeleteCartItem = (skuId) => instance.delete(`/cart/deleteCart/${skuId}`)

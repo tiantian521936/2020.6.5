@@ -129,7 +129,7 @@
                   <a href="#">评价</a>
                 </li>
                 <li :class="{active : isActive('2')}">
-                  <a href="javascript:;" @click="setOrder('2')">
+                  <a href="javascript:;"  @click="setOrder('2')">
                     价格
                     <i class="iconfont" v-if="isActive('2')" :class="iconClass"></i>
                   </a>
@@ -142,9 +142,9 @@
               <li v-for="goods in productList.goodsList " :key="goods.id" class="yui3-u-1-5">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="javascript:;" target="_blank">
+                    <router-link :to="`/detail/${goods.id}`">
                       <img :src="goods.defaultImg" />
-                    </a>
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -189,7 +189,9 @@
               <li class="yui3-u-1-4">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <img src="./images/like_01.png" />
+                    <a href="##">
+                    <img src="./images/like_03.png" />
+                    </a>
                   </div>
                   <div class="attr">
                     <em>Apple苹果iPhone 6s (A1699)</em>
@@ -293,7 +295,7 @@ export default {
         pageNo: 1, // 页码
         pageSize: 5 //	每页数量
       }
-    };
+    }
   },
 
   created() {
@@ -311,20 +313,18 @@ export default {
         : "icon-jiantou";
     }
   },
-
   methods: {
 
     setOrder(flag){
-      let [orderFlag,orderType] = this.options.order.split(':')
-      if(orderFlag === flag){
-        orderType = orderType === 'asc' ? 'desc' : 'asc'
-      }else{
-        orderFlag = flag
-        orderType = 'desc'
-      }
-      this.options.order = orderFlag + ':' + orderType
-      this.getProductList()
-    }
+        let [orderFlag,orderType] = this.options.order.split(':')
+        if(orderFlag === flag){
+          orderType = orderType === 'asc' ? 'desc' : 'asc'
+        }else{
+          orderFlag = flag
+          orderType = 'desc'
+        }
+        this.options.order = orderFlag + ':' + orderType
+        this.getProductList()
     },
 
     isActive(num) {
@@ -368,7 +368,8 @@ export default {
       this.options.trademark = "";
       this.getProductList();
     },
- beforeMount() {
+  },
+  beforeMount() {
     const {
       categoryName,
       category1Id,
@@ -383,13 +384,8 @@ export default {
       category2Id,
       category3Id,
       keyword
-    };
+    }
   },
-
-  }
-
- 
-
   watch: {
     $route () {
       const {
@@ -410,12 +406,11 @@ export default {
 
       this.getProductList();
     }
-  }
-
+  },
   components: {
     SearchSelector
   }
-
+}
 </script>
 
 

@@ -4,7 +4,17 @@ import Search from '../pages/Search'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 
+import AddCartSuccess from '../pages/AddCartSuccess'
+import ShopCart from '../pages/ShopCart'
+
+import Detail from '../pages/Detail'
+
+
 export default[
+    {
+        path:'/detail/:id',
+        component:Detail
+	},
     
     {
         path:'/',
@@ -29,6 +39,18 @@ export default[
         meta:{
             isHide:true
         }
+    },
+
+    {
+        path:'/addcartsuccess',
+        component:AddCartSuccess
+    },
+    {
+        path:'/shopcart',
+        component:ShopCart
     }
+
+
+    
 
 ]
